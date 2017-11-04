@@ -1,4 +1,9 @@
-<h1 align="center">Frontend frameworks code comparison</h1>
+[angular.js]: ./assets/logos/angularjs-small.svg
+[angular]: ./assets/logos/angular-small.svg
+[react]: ./assets/logos/react-small.svg
+[vue]: ./assets/logos/vue-small.svg
+
+<h1 align="center">Frontend Frameworks Code Comparison</h1>
 
 <div align="center">
 
@@ -7,6 +12,8 @@
 ![./assets/logos/vue.svg](./assets/logos/vue.svg)
 
 </div>
+
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Code%20comparison%20of%20modern%20web%20frameworks%2C%20based%20on%20React%2C%20Angular%20and%20Vue.js&url=https://github.com/feimosi/frameworks-code-comparison)
 
 Comparison of different approaches in writing web applications. Based on React, Angular, AngularJS and Vue.js. It is especially useful when migrating between frameworks or switching projects often.
 
@@ -27,9 +34,9 @@ All examples follow the current best practices and conventions that are used ins
   * [Dependency injection](#dependency-injection)
   * [Templates](#templates)
   * [Interpolation](#interpolation)
+  * [Handling DOM Events](#handling-dom-events)
   * [Inputs and Outputs](#inputs-and-outputs)
   * [Default inputs](#default-inputs)
-  * [Handling Events](#handling-events)
   * [Lifecycle methods](#lifecycle-methods)
   * [Conditional rendering](#conditional-rendering)
   * [Lists](#lists)
@@ -44,7 +51,9 @@ All examples follow the current best practices and conventions that are used ins
 
 # Simple component
 
-### AngularJS
+## ![angular.js] AngularJS
+
+Since AngularJS 1.5 we have a new syntax (backported from Angular 2) to built [component-based applications](https://docs.angularjs.org/guide/component#component-based-application-architecture) using `component` type.
 
 ```js
 export class ChangePasswordController {
@@ -90,9 +99,9 @@ export const module = angular
   .component('changePassword', component);
 ```
 
-:arrow_right: https://docs.angularjs.org/guide/component
+:link: https://docs.angularjs.org/guide/component
 
-### Angular
+## ![angular] Angular
 
 ```ts
 import { Component } from '@angular/core';
@@ -140,9 +149,9 @@ import { ChangePasswordComponent } from './change-password.component';
 export class ChangePasswordModule {}
 ```
 
-:arrow_right: https://angular.io/api/core/Component
+:link: https://angular.io/api/core/Component
 
-### React
+## ![react] React
 
 ```jsx
 import Logger from 'utils/logger';
@@ -169,9 +178,9 @@ export class ChangePassword {
 }
 ```
 
-:arrow_right: https://reactjs.org/docs/react-component.html
+:link: https://reactjs.org/docs/react-component.html
 
-### Vue.js
+## ![vue] Vue.js
 
 ```js
 import Vue from 'vue';
@@ -199,11 +208,11 @@ Vue.component('change-password', {
 });
 ```
 
-:arrow_right: https://vuejs.org/v2/guide/components.html
+:link: https://vuejs.org/v2/guide/components.html
 
 # Dependency injection
 
-### AngularJS
+## ![angular.js] AngularJS
 
 In AngularJS the constructor is being used to inject dependencies, which is done implicitly by the [$inject](https://docs.angularjs.org/api/auto/service/$injector) service.
 
@@ -226,9 +235,9 @@ export class ChangePasswordController {
 }
 ```
 
-:arrow_right: https://docs.angularjs.org/guide/di
+:link: https://docs.angularjs.org/guide/di
 
-### Angular
+## ![angular] Angular
 
 You specify the definition of the dependencies in the constructor (leveraging TypeScript's constructor syntax for declaring parameters and properties simultaneously).
 
@@ -256,17 +265,16 @@ export class ChangePasswordComponent {
 }
 ```
 
-:arrow_right: https://angular.io/guide/dependency-injection
+:link: https://angular.io/guide/dependency-injection
 
-### React
+## ![react] React
 
 There's no special injection mechanism. ES2015 modules are used for dependency management.
 
 ```jsx
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Logger from 'utils/logger';
 import Notification from 'utils/notification';
-import Auth from 'utils/auth';
 
 export class ChangePassword extends Component {
   handleEvent = () => {
@@ -280,7 +288,7 @@ export class ChangePassword extends Component {
 }
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 Vue.js uses ES2015 modules for dependency management:
 
@@ -288,7 +296,6 @@ Vue.js uses ES2015 modules for dependency management:
 import Vue from 'vue';
 import Logger from 'utils/logger';
 import Notification from 'utils/notification';
-import Auth from 'utils/auth';
 
 Vue.component('change-password', {
   template: '<div>{{ /* template */ }}</div>',
@@ -333,7 +340,7 @@ Vue.component('change-password', {
 
 # Templates
 
-### AngularJS
+## ![angular.js] AngularJS
 
 Templates in AngularJS are compiled by the [$compile](https://docs.angularjs.org/api/ng/service/$compile) service.
 Values of component properties must be one of the following:
@@ -349,9 +356,9 @@ Values of component properties must be one of the following:
 </primary-button>
 ```
 
-### Angular
+## ![angular] Angular
 
-There are three kinds of possible attributes being passed to the component:
+There are three kinds of attributes that can be passed:
 - text binding, e.g. `size="string"`
 - property binding, e.g. `[disabled]="value"`
 - event binding, e.g. `(click)="eventHandler()"`
@@ -364,7 +371,7 @@ There are three kinds of possible attributes being passed to the component:
 </primary-button>
 ```
 
-### React
+## ![react] React
 
 Templates in React are written inside the JavaScript file using the [JSX language](https://reactjs.org/docs/jsx-in-depth.html). This allows us to utilize all JavaScript capabilities. JSX uses the uppercase and lowercase convention to distinguish between the user-defined components and DOM elements.
 
@@ -378,7 +385,7 @@ Templates in React are written inside the JavaScript file using the [JSX languag
 </PrimaryButton>;
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 Component properties can be passed in as:
 - literal (as strings) e.g. `size="big"`
@@ -387,7 +394,7 @@ Component properties can be passed in as:
 Events can be listened to using [`v-on`](https://vuejs.org/v2/guide/events.html#Method-Event-Handlers) or [`@shorthand`](https://vuejs.org/v2/guide/syntax.html#v-on-Shorthand) combined with the event name, and a method name as the value, e.g `v-on:click="saveContent"`.
 
 ```html
-<primary-button 
+<primary-button
   size="big"
   v-bind:disabled="true"
   v-on:click="saveContent"
@@ -396,11 +403,11 @@ Events can be listened to using [`v-on`](https://vuejs.org/v2/guide/events.html#
 </primary-button>
 ```
 
-:arrow_right: https://vuejs.org/v2/guide/syntax.html
+:link: https://vuejs.org/v2/guide/syntax.html
 
 # Interpolation
 
-### AngularJS
+## ![angular.js] AngularJS
 
 In AngularJS interpolation is the process of data-binding values of the `scope` to the HTML. You can also interpolate more complicated values e.g. expressions or function invocations.
 
@@ -421,11 +428,11 @@ Another way to "bind" data is to use [`ng-bind`](https://docs.angularjs.org/api/
 <span ng-bind="$ctrl.name"></span>
 ```
 
-:arrow_right: https://docs.angularjs.org/guide/interpolation
+:link: https://docs.angularjs.org/guide/interpolation
 
-### Angular
+## ![angular] Angular
 
-Angular is similar to AngularJS, so we use double curly braces (`{{ }}`) for interpolation. Since Angular offers property binding you often have a choice to use it [instead of interpolation](https://angular.io/guide/template-syntax#property-binding-or-interpolation). 
+Angular is similar to AngularJS, so we use double curly braces (`{{ }}`) for interpolation. Since Angular offers property binding you often have a choice to use it [instead of interpolation](https://angular.io/guide/template-syntax#property-binding-or-interpolation).
 
 ```html
 <img [src]="image.url" alt="{{ image.alt }}" />
@@ -433,9 +440,9 @@ Angular is similar to AngularJS, so we use double curly braces (`{{ }}`) for int
 
 `[src]` presents property binding while the `alt` attribute is being interpolated.
 
-:arrow_right: https://angular.io/guide/template-syntax#interpolation
+:link: https://angular.io/guide/template-syntax#interpolation
 
-### React
+## ![react] React
 
 React uses single curly braces for interpolation. Any JavaScript can be interpolated.
 
@@ -443,9 +450,9 @@ React uses single curly braces for interpolation. Any JavaScript can be interpol
 <img src={ this.props.image.url } alt={ this.props.image.alt } />;
 ```
 
-:arrow_right: https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx
+:link: https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx
 
-### Vue.js
+## ![vue] Vue.js
 
 ```html
 <img :src="image.url" alt="{{ image.alt }}" />
@@ -457,122 +464,377 @@ You can also perform one-time interpolations that do not update on data change b
 <span v-once>Hello {{ username }}!</span>
 ```
 
-:arrow_right: https://vuejs.org/v2/guide/syntax.html#Interpolations
+:link: https://vuejs.org/v2/guide/syntax.html#Interpolations
+
+# Handling DOM Events
+
+## ![angular.js] AngularJS
+
+Handlers of native events are bound using provided [built-in directives](https://docs.angularjs.org/api/ng/directive) e.g.
+[`ng-click`](https://docs.angularjs.org/api/ng/directive/ngClick), [`ng-focus`](https://docs.angularjs.org/api/ng/directive/ngFocus), [`ng-keypress`](https://docs.angularjs.org/api/ng/directive/ngKeypress).
+
+```js
+class MenuTopbarController {
+  $onInit() {
+    this.selected = null;
+  }
+
+  handleClick(item) {
+    if (this.selected !== item) {
+      this.selected = item;
+      if (typeof item.callback === 'function') {
+        item.callback();
+      }
+    }
+  }
+}
+
+const menuTopbar = {
+  bindings: {
+    items: '<',
+  },
+  template: require('./menuTopbar.html'),
+  controller: MenuTopbarController,
+};
+
+angular.module('app')
+  .component('menuTopbar', menuTopbar);
+```
+
+```html
+<ul>
+  <li ng-repeat="item in $ctrl.items"
+      ng-click="$ctrl.handleClick(item)">
+    {{ item.label }}
+  </li>
+</ul>
+```
+
+:link: https://docs.angularjs.org/tutorial/step_12
+
+## ![angular] Angular
+
+There's a special syntax for binding to element's events with `()`. The target inside the `()` is an event we want to listen for.
+
+```ts
+export interface MenuItem {
+  label: string;
+  callback?: Function;
+}
+```
+
+```ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MenuItem } from './menu-item.interface';
+
+@Component({
+  selector: 'menu-topbar',
+  template: require('./menuTopbar.html'),
+})
+export class MenuTopbarComponent {
+  private selected = null;
+  @Input() items: MenuItem[];
+
+  handleClick(item: MenuItem) {
+    if (this.selected !== item) {
+      this.selected = item;
+      if (item.callback) {
+        item.callback();
+      }
+    }
+  }
+}
+```
+
+```html
+<ul>
+  <li *ngFor="let item of items"
+      (click)="handleClick(item)">
+    {{ item.label }}
+  </li>
+</ul>
+```
+
+To bind to component's host element events, you can use [`HostListener`](https://angular.io/api/core/HostListener) decorator.
+
+```ts
+@Component({
+  selector: 'menu-topbar',
+  template: require('./menuTopbar.html'),
+})
+export class MenuTopbarComponent {
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight('#DDD');
+  }
+  
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight(null);
+  }
+
+  private highlight(color) {
+    /* ... */
+  }
+```
+
+## ![react] React
+
+Handling events with React elements is very similar to handling events on DOM elements. There are two syntactic differences though.
+
+- React events are named using camelCase, rather than lowercase e.g. (onClick, onFocus, onKeyPress).
+- With JSX you pass a function as the event handler, rather than a string.
+
+Your event handlers will be passed instances of [`SyntheticEvent`](https://reactjs.org/docs/events.html), a cross-browser wrapper around the browser’s native event. It has the same interface as the browser’s native event, including [`stopPropagation()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) and [`preventDefault()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault), except the events work identically across all browsers.
+
+```jsx
+import React, { Component } from 'react';
+
+export class MenuTopbar extends Component {
+  state = {
+    selected: null,
+  };
+
+  handleClick(item) {
+    if (this.selected !== item) {
+      this.setState({ selected: item });
+      if (item.callback) {
+        item.callback();
+      }
+    }
+  }
+
+  render() {
+    return (
+      <ul>
+        { this.props.items.map(item => (
+          <li
+            key={ item.label }
+            onClick={ () => this.handleClick(item) }
+          >
+            { item.label }
+          </li>
+        ))
+        }
+      </ul>
+    );
+  }
+}
+```
+
+:link: https://reactjs.org/docs/handling-events.html
+
+## ![vue] Vue.js
+
+We can use the v-on directive (or `@` shorthand) to listen to DOM events and run some JavaScript when they’re triggered.
+
+Vue also provides event modifiers (directive postfixes denoted by a dot).
+
+- `.stop` - stopPropagation
+- `.prevent` - preventDefault
+- `.capture` - use capture mode
+- `.self` - only trigger handler if event.target is the element itself
+- `.once` - the event will be triggered at most once
+
+```js
+Vue.component('menu-topbar', {
+  data: {
+    selected: null,
+  },
+  methods: {
+    handleClick: (item) => {
+      if (this.selected !== item) {
+        this.selected = item;
+        if (item.callback) {
+          item.callback();
+        }
+      }
+    },
+  },
+});
+```
+
+```html
+<ul>
+  <li 
+    v-for="item in items" 
+    :key="item.label"
+    @click="handleClick(item)"
+  >
+    {{ item.label }}
+  </li>
+</ul>
+```
+
+:link: https://vuejs.org/v2/guide/events.html
 
 # Inputs and Outputs
 
-### AngularJS
+## ![angular.js] AngularJS
 
-AngularJs has introduced a new syntax for inputs/outputs which was back ported from Angular. The main purpose of this new syntax is to enforce the One-way dataflow pattern. Read more
-in the [official documentation](https://docs.angularjs.org/guide/component#component-based-application-architecture):
+Inputs are defined by either `@` (string binding) or `<` (one-way binding) while outputs are defined by the `&` symbol. Passing arguments requires you to use an object in a child component which is then mapped to function parameters defined in the template.
 
 ```js
-class UserPreviewComponent { }
+class UserPreviewComponent {
+  $onInit() {
+    this.editedUser = {
+      name: this.user.name,
+      email: this.user.email,
+    };
+  }
+
+  submitEdit() {
+    this.onEdit({ user: this.editedUser });
+  }
+}
 
 const component = {
   bindings: {
     user: '<',
     onEdit: '&',
   },
-  template: `
-  <form ng-submit="$ctrl.onEdit();">
-    <input type="text" ng-model="$ctrl.user.name">
-    <input type="text" ng-model="$ctrl.user.email">
-    <button type="submit">Submit</button>
-  </form>
-  `,
+  template: require('./userPreview.html'),
   controller: UserPreviewComponent,
 };
 
-export default angular.module.component('user-preview', component);
+export default angular.module.component('userPreview', component);
 ```
 
-In a parent component, i.e. `SettingsComponent`:
+```html
+<form ng-submit="$ctrl.submitEdit()">
+  <input type="text" ng-model="$ctrl.editedUser.name">
+  <input type="email" ng-model="$ctrl.editedUser.email">
+  <input type="submit" value="Submit" />
+</form>
+```
+
+In a parent component:
 
 ```js
 class SettingsComponent {
-  constructor() {
-    this.user = {
-      name: 'Foo Bar',
-      email: 'foobar@example.com',
-    };
-  }
-  editedUser(user){
+  user = {
+    name: 'John Smith',
+    email: 'john.smith@example.com',
+  };
+
+  editUser(user) {
+    this.user = Object.assign({}, this.user, user);
     console.log('Name of the edited user is', user.name);
   }
 }
 
 const component = {
-  template: '<user-preview user="user" on-edit="editedUser()"></user-preview>',
+  template: require('./settings.html'),
   controller: SettingsComponent,
 };
 
-export default angular.module.component('app-settings', component);
+export default angular.module.component('settings', component);
 ```
 
-### Angular
+```html
+<user-preview user="user"
+              on-edit="editUser(user)">
+</user-preview>
+```
 
-Angular introduced a new pattern for Component interactions, this pattern follows the [Flux](https://facebook.github.io/flux/) architecture. Read more in the [official documentation](https://angular.io/guide/component-interaction).
+## ![angular] Angular
+
+Inputs are defined using the [@Input](https://angular.io/api/core/Input) decorator while outputs using the [@Output](https://angular.io/api/core/Output) decorator.
 
 ```ts
 @Component({
   selector: 'user-preview',
-  template: `
-  <form (ngSubmit)="emitEditedUser();">
-    <input type="text" value="{{user.name}}">
-    <input type="text" value="{{user.email}}">
-    <button type="submit">Submit</button>
-  </form>
-  `
+  template: require('./userPreview.html'),
 })
 export class UserPreviewComponent {
+  private editedUser: User;
   @Input() user: User;
   @Output() onEdit: EventEmitter = new EventEmitter<User>();
 
-  emitEditedUser() {
-    this.onEdit.emit(this.user);
+  ngOnInit() {
+    this.editedUser = {
+      name: this.user.name,
+      email: this.user.email,
+    };
+  }
+
+  submitEdit() {
+    this.onEdit.emit(this.editedUser);
   }
 }
-
 ```
 
-In a parent component, i.e. `SettingsComponent`:
+```html
+<form (ngSubmit)="submitEdit()">
+  <input type="text" [(ngModel)]="editedUser.name">
+  <input type="text" [(ngModel)]="editedUser.email">
+  <input type="submit" value="Submit" />
+</form>
+```
+
+In a parent component:
 
 ```ts
 @Component({
-  selector: 'app-settings',
-  template: `
-    <user-preview [user]="user" (onEdit)="editedUser($event)"></user-preview>
-  `,
+  selector: 'settings',
+  template: require('./settings.html'),
 })
 export class SettingsComponent {
-  user: User;
-  constructor() {
-    this.user = {
-      name: 'Foo Bar',
-      email: 'foobar@example.com',
-    };
-  }
-  editedUser(user: User){
-    console.log('Name of the edited user is', user.name);
+  user: User = {
+    name: 'John Smith',
+    email: 'john.smith@example.com',
+  };
+
+  editUser(user: User) {
+    this.user = Object.assign({}, this.user, user);
+    console.log('User has been edited: ', user);
   }
 }
 ```
 
-### React
+```html
+<user-preview [user]="user"
+              (onEdit)="editUser($event)"
+></user-preview>
+```
+
+:link: https://angular.io/guide/component-interaction
+
+## ![react] React
 
 ```jsx
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { User } from 'utils';
 
-class UserPreviewComponent extends React.Component {
+class UserPreviewComponent extends Component {
+  submitEdit = () => {
+    this.props.onEdit({
+      name: this.state.name,
+      email: this.state.email,
+    });
+  };
+
+  handleInputChange({ target }) {
+    this.setState({
+      [target.name]: target.value,
+    });
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.onEdit}>
-        <input type="text" value={this.props.user.email} />
-        <input type="text" value={this.props.user.name} />
-        <button type="submit">Submit</button>
+      <form onSubmit={ this.submitEdit }>
+        <input
+          type="text"
+          name="name"
+          value={ this.state.name }
+          onChange={ this.handleInputChange }
+        />
+        <input
+          type="email"
+          name="email"
+          value={ this.state.email }
+          onChange={ this.handleInputChange }
+        />
+        <input type="submit" value="Submit" />
       </form>
     );
   }
@@ -580,53 +842,53 @@ class UserPreviewComponent extends React.Component {
 
 UserPreviewComponent.propTypes = {
   user: PropTypes.instanceOf(User),
+  onEdit: PropTypes.func,
 };
 ```
 
-In a parent component, i.e. `SettingsComponent`:
+In a parent component:
 
 ```jsx
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { User } from 'utils';
 
 export class SettingsComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        name: 'Foo Bar',
-        email: 'foobar@example.com',
-      },
-    };
-  }
+  state = {
+    user: {
+      name: 'John Smith',
+      email: 'john.smith@example.com',
+    },
+  };
 
-  editedUser(user: User){
-    console.log('Name of the edited user is', user.name);
+  editUser(user: User){
+    this.setState({
+      user: Object.assign({}, this.state.user, user),
+    });
+    console.log('User has been edited: ', user);
   }
 
   render() {
     return (
-      <UserPreviewComponent user={this.state.user} onEdit={(user) => this.editedUser(user)} />
+      <UserPreviewComponent
+        user={ this.state.user }
+        onEdit={ (user) => this.editUser(user) }
+      />
     );
   }
 }
 ```
 
-Read more about React's [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html).
-
-For communication between two components that don't have a parent-child relationship, you can set up your own global event system. Subscribe to events in `componentDidMount()`, unsubscribe in `componentWillUnmount()`, and call `setState()` when you receive an event. The [Flux](https://facebook.github.io/flux/) pattern is one of the possible ways to arrange this.
-
-### Vue.js
+## ![vue] Vue.js
 
 > TODO
 
-:arrow_right: https://vuejs.org/v2/guide/components.html#Props
+:link: https://vuejs.org/v2/guide/components.html#Props
 
 # Default inputs
 
-### AngularJS
+## ![angular.js] AngularJS
 
-There's no built-in mechanism for default inputs, because of this we assign them programatically in the `$onChanges` hook.
+There's no built-in mechanism for default inputs, so we assign them programmatically in the `$onChanges` hook.
 
 ```js
 class CoursesListController {
@@ -648,9 +910,11 @@ const component = {
   templateUrl: './coursesList.component.html',
   controller: CoursesListController,
 };
+
+export default component;
 ```
 
-### Angular
+## ![angular] Angular
 
 ```ts
 import { Component } from '@angular/core';
@@ -665,10 +929,13 @@ export class CoursesListController {
 }
 ```
 
-### React
+## ![react] React
 
 ```jsx
-class CoursesListController {
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+export class CoursesListController extends { Component } {
   static propTypes = {
     displayPurchased: PropTypes.bool,
     displayAvailable: PropTypes.bool,
@@ -685,9 +952,9 @@ class CoursesListController {
 }
 ```
 
-:arrow_right: https://reactjs.org/docs/typechecking-with-proptypes.html#default-prop-values
+:link: https://reactjs.org/docs/typechecking-with-proptypes.html#default-prop-values
 
-### Vue.js
+## ![vue] Vue.js
 
 ```js
 import Vue from 'vue';
@@ -707,15 +974,11 @@ Vue.component('courses-list', {
 });
 ```
 
-# Handling Events
-
-> TODO
-
 # Lifecycle methods
 
-### AngularJS
+## ![angular.js] AngularJS
 
-`$onInit()` - called when the component has been constructed and has its bindings initialized.
+`$onInit()` - called when the component has been constructed and has its bindings have been initialized.
 
 `$postLink()` - called after the component and its children have been linked (mounted).
 
@@ -725,20 +988,18 @@ Vue.component('courses-list', {
 
 `$onDestroy()` - called when the component (a controller with its containing scope) is being destroyed.
 
-:arrow_right: https://docs.angularjs.org/api/ng/service/$compile
+:link: https://docs.angularjs.org/api/ng/service/$compile
 
-### Angular
-[Live Examples Here!](https://angular.io/generated/live-examples/lifecycle-hooks/eplnkr.html)
+### ![angular] Angular
 
 #### [ngOnChanges()](https://angular.io/guide/lifecycle-hooks#onchanges)
+
 Respond when Angular (re)sets data-bound input properties. The method receives a `SimpleChanges` object of current and previous property values.
 
 Called before `ngOnInit()` and whenever one or more data-bound input properties change.
-```typescript
-export class PeekABooComponent extends PeekABoo implements OnChanges {
 
-  // ...
-  
+```ts
+export class PeekABooComponent extends PeekABoo implements OnChanges {
   // only called for/if there is an @input variable set by parent.
   ngOnChanges(changes: SimpleChanges) {
     let changesMsgs: string[] = [];
@@ -752,18 +1013,17 @@ export class PeekABooComponent extends PeekABoo implements OnChanges {
     }
     this.logIt(`OnChanges: ${changesMsgs.join('; ')}`);
     this.verb = 'changed'; // next time it will be a change
-  }
-  
-  // ...
-  
+  } 
 }
 ```
 
 #### [ngOnInit()](https://angular.io/guide/lifecycle-hooks#oninit)
+
 Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties.
 
 Called once, after the first `ngOnChanges()`.
-```typescript
+
+```ts
 export class PeekABoo implements OnInit {
   constructor(private logger: LoggerService) { }
 
@@ -777,82 +1037,68 @@ export class PeekABoo implements OnInit {
 ```
 
 #### [ngDoCheck()](https://angular.io/guide/lifecycle-hooks#docheck)
+
 Detect and act upon changes that Angular can't or won't detect on its own.
 
 Called during every change detection run, immediately after `ngOnChanges()` and `ngOnInit()`.
-```typescript
-export class PeekABooComponent extends PeekABoo implements DoCheck {
 
-  // ...
-  
+```ts
+export class PeekABooComponent extends PeekABoo implements DoCheck {
   ngDoCheck() { 
     this.logIt(`DoCheck`);
   }
-  
-  // ...
-  
 }
 ```
 
 #### [ngAfterContentInit()](https://angular.io/guide/lifecycle-hooks#aftercontent-hooks)
+
 Respond after Angular projects external content into the component's view.
 Called once after the first `ngDoCheck()`.
-```typescript
+
+```ts
 export class PeekABooComponent extends PeekABoo implements AfterContentInit {
-
-  // ...
-
   ngAfterContentInit() { this.logIt(`AfterContentInit`);  }
-  
-  // ...
-  
 }
 ```
 
 #### [ngAfterContentChecked()](https://angular.io/guide/lifecycle-hooks#aftercontent-hooks)
- Respond after Angular checks the content projected into the component.
+
+Respond after Angular checks the content projected into the component.
 
 Called after the `ngAfterContentInit()` and every subsequent `ngDoCheck()`
-```typescript
+
+```ts
 export class PeekABooComponent extends PeekABoo implements AfterContentChecked {
-
-  // ...
-
   // Beware! Called frequently!
   // Called in every change detection cycle anywhere on the page
   ngAfterContentChecked() { this.logIt(`AfterContentChecked`); }
-  
-  // ...
-  
 }
 ```
 
 #### [ngAfterViewInit()](https://angular.io/guide/lifecycle-hooks#afterview)
+
 Respond after Angular initializes the component's views and child views.
 
 Called once after the first `ngAfterContentChecked()`.
-```typescript
+
+```ts
 export class AfterViewComponent implements  AfterViewChecked, AfterViewInit {  
-  // ...
-  
   ngAfterViewInit() {
     // viewChild is set after the view has been initialized
     this.logIt('AfterViewInit');
     this.doSomething();
   }
-  
-  // ...
 }
 ```
 
 #### [ngAfterViewChecked()](https://angular.io/guide/lifecycle-hooks#afterview)
+
 Respond after Angular checks the component's views and child views.
 
 Called after the `ngAfterViewInit` and every subsequent `ngAfterContentChecked()`
-```typescript
-export class AfterViewComponent implements  AfterViewChecked, AfterViewInit 
-  // ...
 
+```ts
+export class AfterViewComponent implements  AfterViewChecked, AfterViewInit 
   ngAfterViewChecked() {
     // viewChild is updated after the view has been checked
     if (this.prevHero === this.viewChild.hero) {
@@ -863,16 +1109,16 @@ export class AfterViewComponent implements  AfterViewChecked, AfterViewInit
       this.doSomething();
     }
   }
-  
-  // ...
 }
 ```
 
 #### [ngOnDestroy()](https://angular.io/guide/lifecycle-hooks#ondestroy)
+
 Cleanup just before Angular destroys the directive/component. Unsubscribe Observables and detach event handlers to avoid memory leaks.
 
 Called just before Angular destroys the directive/component.
-```typescript
+
+```ts
 @Directive({
     selector: '[destroyDirective]'
 })
@@ -888,14 +1134,16 @@ export class OnDestroyDirective implements OnDestroy {
 }
 ```
 
-### React
+## ![react] React
 
 #### Mounting
 
 [`constructor(props)`](https://reactjs.org/docs/react-component.html#constructor) - the first method called in the lifecycle before mounting. If used, it must include `super(props)` as first call:
 
 ```jsx
-class CreationDate extends Component {
+import React, { Component } from 'react';
+
+export class CreationDate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -907,7 +1155,7 @@ class CreationDate extends Component {
 
 [`componentWillMount()`](https://reactjs.org/docs/react-component.html#componentwillmount) - is invoked just before rendering. Modifying the state here won't trigger a re-render.
 
-[`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount) - is invoked after render. Useful for initialisations that require DOM nodes.
+[`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount) - is invoked after render. Useful for the initialization that require DOM nodes.
 
 #### Updating
 
@@ -927,7 +1175,7 @@ class CreationDate extends Component {
 
 [`componentDidCatch(error,info)`](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html) - is invoked when Javascript throws an error anywhere in the component's tree. Useful for catching errors, showing a fallback interface, and logging errors without breaking the entire application.
 
-### Vue.js
+## ![vue] Vue.js
 
 #### beforeCreate
 
@@ -943,7 +1191,7 @@ new Vue({
 
 #### created
 
-Called synchronously after the instance is created. At this stage, the instance has finished processing the options which means the following have been set up: data observation, computed properties, methods, watch/event callbacks. However, the mounting phase has not been started, and the `$el` property will not be available yet.
+Called synchronously after the instance is created. At this stage, the instance has finished processing the options, which means the following have been set up: data observation, computed properties, methods, watch/event callbacks. However, the mounting phase has not been started, and the `$el` property will not be available yet.
 
 ```javascript
 new Vue({
@@ -1035,7 +1283,7 @@ _This hook is not called during server-side rendering._
 
 # Conditional rendering
 
-### AngularJS
+## ![angular.js] AngularJS
 
 Angularjs 1.x has three ways to perform conditional rendering: `ng-if`, `ng-switch` and `ng-hide/ng-show`.
 
@@ -1059,13 +1307,13 @@ export class RegistrationController {
 
 <div ng-show="displaySpecialOffer">
   <special-offer></special-offer>
-</div>  
+</div>
 <div ng-hide="displaySpecialOffer">
   <special-offer></special-offer>
-</div>  
+</div>
 ```
 
-### Angular
+## ![angular] Angular
 
 Since Angular 4.0.0, alongside standard `ngIf`, it is possible to use `ngIf;else` or `ngIf;then;else` using `<ng-template>` with an alias `#aliasName`.
 
@@ -1096,15 +1344,18 @@ export class RegistrationComponent {
 </ng-template>
 ```
 
-:arrow_right: https://angular.io/api/common/NgIf
+:link: https://angular.io/api/common/NgIf
 
-### React
+## ![react] React
 
-The most common approach to conditional rendering is by using the ternary operator:  
+The most common approach to conditional rendering is by using the ternary operator:
 `{ condition ? <Component /> : null }`
 
 ```jsx
-class Registration extends React.Component {
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+export class Registration extends Component {
   state = {
     registrationCompleted: false,
   };
@@ -1129,7 +1380,7 @@ class Registration extends React.Component {
 }
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 Vue.js has three directives to perform conditional rendering: `v-if`, `v-else-if` and `v-else`.
 
@@ -1148,11 +1399,11 @@ Vue.js has three directives to perform conditional rendering: `v-if`, `v-else-if
 </template>
 ```
 
-:arrow_right: https://vuejs.org/v2/guide/conditional.html
+:link: https://vuejs.org/v2/guide/conditional.html
 
 # Lists
 
-### AngularJS
+## ![angular.js] AngularJS
 
 [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat)
 
@@ -1188,7 +1439,7 @@ export class BookListComponentCtrl {
 </ul>
 ```
 
-### Angular
+## ![angular] Angular
 
 [ngFor](https://angular.io/guide/template-syntax#ngfor)
 
@@ -1239,33 +1490,33 @@ export class BookListComponent {
 }
 ```
 
-### React
+## ![react] React
 
 [Lists and Keys](https://reactjs.org/docs/lists-and-keys.html)
 
 ```jsx
-class BookList extends React.Component {
-  constructor() {
-    this.state = {
-      books: [
-        {
-          id: 1,
-          title: 'Eloquent JavaScript',
-          author: 'Marijn Haverbeke',
-        },
-        {
-          id: 2,
-          title: 'JavaScript: The Good Parts',
-          author: 'Douglas Crockford',
-        },
-        {
-          id: 3,
-          title: 'JavaScript: The Definitive Guide',
-          author: 'David Flanagan',
-        },
-      ],
-    };
-  }
+import React, { Component } from 'react';
+
+export class BookList extends Component {
+  state = {
+    books: [
+      {
+        id: 1,
+        title: 'Eloquent JavaScript',
+        author: 'Marijn Haverbeke',
+      },
+      {
+        id: 2,
+        title: 'JavaScript: The Good Parts',
+        author: 'Douglas Crockford',
+      },
+      {
+        id: 3,
+        title: 'JavaScript: The Definitive Guide',
+        author: 'David Flanagan',
+      },
+    ],
+  };
 
   render() {
     const { books } = this.state;
@@ -1285,7 +1536,7 @@ class BookList extends React.Component {
 }
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 ```html
 <template>
@@ -1325,9 +1576,9 @@ export default {
 
 # Filters
 
-### AngularJS
+## ![angular.js] AngularJS
 
-AngularJS provides filters to transform data. There are several [built-in filters](https://docs.angularjs.org/api/ng/filter) to use and you can make your own custom filters as well.
+AngularJS provides filters to transform data. There are several [built-in filters](https://docs.angularjs.org/api/ng/filter) available and you can make your own custom filters as well.
 
 Filters can be applied to view templates using the following syntax:
 
@@ -1341,7 +1592,7 @@ Chaining of filters is also possible:
 <h1>{{ name | uppercase | appendTitle  }}</h1>
 ```
 
-Custom Filters:  
+Custom Filters:
 
 ```js
 angular.module('app', [])
@@ -1354,11 +1605,11 @@ angular.module('app', [])
   });
 ```
 
-:arrow_right: https://docs.angularjs.org/guide/filter
+:link: https://docs.angularjs.org/guide/filter
 
-### Angular
+## ![angular] Angular
 
-In Angular filters are called [pipes](https://angular.io/guide/pipes). Built-in pipes available in Angular are: DatePipe, UpperCasePipe, LowerCasePipe, CurrencyPipe, and PercentPipe.
+In Angular filters are called [pipes](https://angular.io/guide/pipes). The built-in pipes available in Angular are: DatePipe, UpperCasePipe, LowerCasePipe, CurrencyPipe, and PercentPipe.
 
 Apart from the built-in pipes, you can create your own, custom pipes.
 
@@ -1379,7 +1630,7 @@ export class SafePipe implements PipeTransform {
 ```
 
 Use the custom pipe in a template:
-The given `someUrl` is filtered through the `safe` pipe which transforms it trough the `DomSanitizer` function `bypassSecurityTrustResourceUrl`. More on the DomSanitizer [here](https://angular.io/api/platform-browser/DomSanitizer).
+The given `someUrl` is filtered through the `safe` pipe which transforms it trough the [`DomSanitizer`](https://angular.io/api/platform-browser/DomSanitizer) function `bypassSecurityTrustResourceUrl`.
 
 ```html
   <iframe [src]="someUrl | safe"></iframe>
@@ -1387,9 +1638,9 @@ The given `someUrl` is filtered through the `safe` pipe which transforms it trou
 
 Note: `[src]` above is an input to the component which 'lives' above the `iframe`.
 
-:arrow_right: https://angular.io/guide/pipes
+:link: https://angular.io/guide/pipes
 
-### React
+## ![react] React
 
 React doesn't provide any specific filtering mechanism. This can simply be achieved by using ordinary JavaScript functions:
 
@@ -1402,6 +1653,7 @@ export function reverse(input = '', uppercase = false) {
 ```
 
 ```jsx
+import React, { Component } from 'react';
 import { reverse } from 'utils';
 
 export class App extends Component {
@@ -1423,11 +1675,11 @@ Filter chaining can be achieved using function composition:
 </div>;
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 Vue.js provides filters to allow for simple text formatting. The filter utilizes the `|` character which is appended to the expression followed by the filter's name. Vue does not come with any pre-built filters.
 
-Filters are usable within mustache interpolations:
+Filters can be used within mustache interpolations:
 
 ```html
 <h1>{{ name | lowercase }}</h1>
@@ -1470,11 +1722,11 @@ Vue.filter('lowercase', word => word.toLowerCase());
 
 For global filters to work, they should be declared before the Vue instance.
 
-:arrow_right: https://vuejs.org/v2/guide/filters.html
+:link: https://vuejs.org/v2/guide/filters.html
 
 # Child nodes
 
-### AngularJS
+## ![angular.js] AngularJS
 
 Inside a [component](https://docs.angularjs.org/guide/component), we have access to the child node by injecting `$element` to the controller. This object contains a [jqLite](https://docs.angularjs.org/api/ng/function/angular.element) wrapped instance of the DOM element. Accessing `$element[0]` will return the bare DOM element.
 
@@ -1505,7 +1757,7 @@ const component = {
 };
 ```
 
-### Angular
+## ![angular] Angular
 
 Angular provides two ways to deal with child nodes: `ViewChild` and `ContentChild`. They both have the same purpose, but there are different use cases for them.
 
@@ -1545,13 +1797,13 @@ export class Parent implements AfterViewInit, AfterContentInit {
   @ContentChild(Child) contentChild: Child;
 
   ngAfterViewInit() {
-    // ViewChild element is only avaliable when the
+    // ViewChild element is only available when the
     // ngAfterViewInit lifecycle hook is reached.
     console.log(this.viewChild);
   }
 
   ngAfterContentInit() {
-    // ContentChild element is only avaliable when the
+    // ContentChild element is only available when the
     // ngAfterContentInit lifecycle hook is reached.
     console.log(this.contentChild);
   }
@@ -1571,7 +1823,7 @@ export class AppComponent { }
 
 `ViewChild` and `ContentChild` only work with a **single** DOM element. You can use [`ViewChildren`](https://angular.io/api/core/ViewChildren) and [`ContentChildren`](https://angular.io/api/core/ContentChildren) in order to get **multiple elements**. Both return the elements wrapped in a [`QueryList`](https://angular.io/api/core/QueryList).
 
-### React
+## ![react] React
 
 In React, we have two options to deal with child nodes: [`refs`](https://reactjs.org/docs/refs-and-the-dom) and [`children`](https://reactjs.org/docs/jsx-in-depth.html#children-in-jsx). With `refs`, you have access to the real DOM element. The `children` property lets you manipulate the underlying [React elements](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html).
 
@@ -1580,6 +1832,8 @@ In React, we have two options to deal with child nodes: [`refs`](https://reactjs
 `ref` is a special attribute we can pass to a React element that receives a callback and call it with the corresponding DOM node.
 
 ```jsx
+import React, { Component } from 'react';
+
 // In order to access child nodes from parents, we can pass the `ref` callback
 // to the children as props.
 const TextInput = ({ inputRef }) => (
@@ -1588,8 +1842,7 @@ const TextInput = ({ inputRef }) => (
   </div>
 );
 
-class Parent extends React.Component {
-
+class Parent extends Component {
   componentDidMount() {
     // Refs are only executed after mounting and unmounting. Now `this.textInput`
     // references a real DOM node. So, we can use the raw DOM API
@@ -1614,9 +1867,11 @@ class Parent extends React.Component {
 
 #### children
 
-`children` is a special prop avaliable in all React component instances. You can use it to control _how_ and _where_ the underlying React elements will be rendered.
+`children` is a special prop available in all React component instances. You can use it to control _how_ and _where_ the underlying React elements will be rendered.
 
 ```jsx
+import React, { Component } from 'react';
+
 // children is just a prop. In this case, the value of `children` will be
 // what you pass to the <Heading /> component as a child node.
 const Heading = ({ children }) => (
@@ -1626,7 +1881,7 @@ const Heading = ({ children }) => (
 );
 
 // `this.props.children` refers to whatever is a valid node inside the <Layout /> element.
-class Layout extends React.Component {
+class Layout extends Component {
   render() {
     return (
       <div class="Layout">
@@ -1648,7 +1903,7 @@ const App = () => (
 );
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 > TODO
 
@@ -1656,7 +1911,7 @@ const App = () => (
 
 ## Basic
 
-### AngularJS
+## ![angular.js] AngularJS
 
 ```js
 angular.module('app.layout', [])
@@ -1684,7 +1939,7 @@ angular.module('app.layout', [])
 </layout>
 ```
 
-### Angular
+## ![angular] Angular
 
 ```ts
 @Component({
@@ -1716,7 +1971,7 @@ export class PageFooter {}
 </layout>
 ```
 
-### React
+## ![react] React
 
 ```jsx
 const Layout = ({ children, theme }) => (
@@ -1739,13 +1994,13 @@ const PageFooter = () => (
 </Layout>;
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 > TODO
 
 ## Multiple slots
 
-### AngularJS
+## ![angular.js] AngularJS
 
 ```js
 angular.module('app.layout', [])
@@ -1777,11 +2032,11 @@ angular.module('app.layout', [])
 </div>
 ```
 
-### Angular
+## ![angular] Angular
 
 > TODO
 
-### React
+## ![react] React
 
 ```jsx
 const Layout = ({ children, theme }) => (
@@ -1813,13 +2068,51 @@ const Content = () => (
 </Layout>;
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
-> TODO
+App layout:
+```html
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+Parent markup:
+```html
+<app-layout>
+  <h1 slot="header">Here might be a page title</h1>
+  <p>A paragraph for the main content.</p>
+  <p>And another one.</p>
+  <p slot="footer">Here's some contact info</p>
+</app-layout>
+```
+Result:
+```html
+<div class="container">
+  <header>
+    <h1>Here might be a page title</h1>
+  </header>
+  <main>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </main>
+  <footer>
+    <p>Here's some contact info</p>
+  </footer>
+</div>
+```
+:link: https://vuejs.org/v2/guide/components.html#Named-Slots
 
 # Class toggling
 
-### AngularJS
+## ![angular.js] AngularJS
 
 The [ng-class](https://docs.angularjs.org/api/ng/directive/ngClass) directive allows you to dynamically set CSS classes on an HTML element.
 
@@ -1830,7 +2123,7 @@ The [ng-class](https://docs.angularjs.org/api/ng/directive/ngClass) directive al
 </main-header>
 ```
 
-### Angular
+## ![angular] Angular
 
 In Angular, the [ngClass](https://angular.io/guide/ajs-quick-reference#ngclass) directive works similarly. It includes/excludes CSS classes based on an expression.
 
@@ -1841,22 +2134,113 @@ In Angular, the [ngClass](https://angular.io/guide/ajs-quick-reference#ngclass) 
 </main-header>
 ```
 
-### React
-> TODO
+## ![react] React
 
-### Vue.js
-> TODO
+The React approach allows us to construct className string with JavaScript.
+
+```jsx
+<MainHeader
+  className={ this.props.isFluid ? 'mainNavbar--fluid' : '' }
+/>;
+```
+
+Many utility libraries have emerged - [classnames](https://github.com/JedWatson/classnames) being among the most popular.
+
+```jsx
+class App {
+  /* ... */
+  render() {
+    const classNames = classNames({
+      'mainNavbar--fluid': this.props.isFluid,
+    });
+
+    return (
+      <MainHeader
+        className={ classNames }
+      />
+    );
+  }
+}
+```
+
+## ![vue] Vue.js
+
+```html
+<main-header
+  v-bind:class="{ 'mainNavbar--fluid': isFluid }"
+>
+```
+
+:link: https://vuejs.org/v2/guide/class-and-style.html
 
 # Data binding
 
-### Vue.js
-You can use the `v-model` directive to create **two-way data bindings** on form `input` and `textarea` elements. It automatically picks the correct way to update the element based on the input type. Although a bit magical, `v-model` is essentially syntax sugar for updating data on user input events, plus special care for some edge cases.
+## ![angular.js] AngularJS
+
+The [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) directive binds a form control to a property in the controller. This provides two-way binding.
+
+```js
+import angular from 'angular';
+import template from './registration.html';
+
+class RegistrationController {
+  $onInit() {
+    this.name = '';
+  }
+}
+
+const component = {
+  bindings: {},
+  template,
+  controller: RegistrationController,
+};
+
+export const module = angular
+  .module('app.registration', [])
+  .component('registration', component);
+```
+
+```html
+<input ng-model="$ctrl.name" />
+<p>Name: {{ $ctrl.name }}</p>
+```
+
+## ![angular] Angular
+
+We use [`[(ngModel)]`](https://angular.io/api/forms/NgModel) to have a two-way data binding inside our forms. The value in the UI will always be synced with the domain model in the component.
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'registration',
+  templateUrl: require('registration.component.html'),
+})
+export class RegistrationComponent {
+  name: string = '';
+}
+```
+
+```html
+<input [(ngModel)]="name" />
+<p>Name: {{ name }}</p>
+```
+
+:link: https://angular.io/guide/template-syntax#two-way-binding
+
+## ![react] React
 
 > TODO
 
+## ![vue] Vue.js
+
+You can use the `v-model` directive to create **two-way data bindings** on form `input` and `textarea` elements. It automatically picks the correct way to update the element based on the input type. Although a bit magical, `v-model` is essentially syntax sugar for updating data on user input events, plus special care for some edge cases.
+
+:link: https://vuejs.org/v2/guide/forms.html
+
 # Forms
 
-### AngularJS
+## ![angular.js] AngularJS
 
 ```js
 class SignInController {
@@ -1893,7 +2277,7 @@ class SignInController {
 </form>
 ```
 
-### Angular
+## ![angular] Angular
 
 Angular offers two ways to build forms:
 
@@ -1902,7 +2286,7 @@ Angular offers two ways to build forms:
 
 The former uses a reactive (or model-driven) approach to build forms. The latter allows you to build forms by writing templates in the Angular template syntax with the form-specific directives and techniques.
 
-#### Reactive forms example
+### ![react] Reactive forms example
 
 ```ts
 import { Component, OnInit } from '@angular/core';
@@ -1977,14 +2361,14 @@ export class TemplateDrivenFormComponent {
 
 The `novalidate` attribute in the `<form>` element prevents the browser from attempting native HTML validations.
 
-### React
+## ![react] React
 
-Two techniques exists in React to handle form data i.e. [Controlled Components](https://reactjs.org/docs/forms.html#controlled-components) and [Uncontrolled Components](https://reactjs.org/docs/uncontrolled-components.html). A controlled component keeps the input's value in the state and updates it via `setState()`. While in an uncontrolled component, form data is handled by DOM itself and referenced via `ref`. In most cases, it is recommended to use controlled components.
+Two techniques exists in React to handle form data: [Controlled Components](https://reactjs.org/docs/forms.html#controlled-components) and [Uncontrolled Components](https://reactjs.org/docs/uncontrolled-components.html). A controlled component keeps the input's value in the state and updates it via `setState()`. While in an uncontrolled component, form data is handled by DOM itself and referenced via `ref`. In most cases, it is recommended to use controlled components.
 
 ```js
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class ReactForm extends React.Component{
+export default class ReactForm extends Component {
   state = {
     email: '',
     password:'',
@@ -2025,9 +2409,9 @@ export default class ReactForm extends React.Component{
 }
 ```
 
-:arrow_right: https://reactjs.org/docs/forms.html
+:link: https://reactjs.org/docs/forms.html
 
-### Vue.js
+## ![vue] Vue.js
 
 ```html
 <template>
@@ -2063,11 +2447,11 @@ export default {
 </script>
 ```
 
-:arrow_right: https://vuejs.org/v2/guide/forms.html
+:link: https://vuejs.org/v2/guide/forms.html
 
 # Styling
 
-### AngularJS
+## ![angular.js] AngularJS
 
 Generally you will use a preprocessor (e.g. [Sass](http://sass-lang.com/)) and assign appropriate classes to the elements.
 
@@ -2095,7 +2479,7 @@ class HeaderController {
 </h1>
 ```
 
-### Angular
+## ![angular] Angular
 
 When defining Angular components you may also include the CSS styles that will go with the template. By default the styles will be compiled as shadow DOM, which basically means you don't need any namespacing strategy for CSS classes.
 
@@ -2131,11 +2515,11 @@ export class HeaderComponent {
 }
 ```
 
-:arrow_right: https://angular.io/guide/component-styles
+:link: https://angular.io/guide/component-styles
 
-### React
+## ![react] React
 
-In the React community there are many approaches to styling your app. From traditional preprocessors (like in the Angular world) to so-called [CSS in JS](https://github.com/MicheleBertoli/css-in-js). The most popular include:
+In the React community there are many approaches to styling your app, ranging from traditional preprocessors (like in the Angular world) to so-called [CSS in JS](https://github.com/MicheleBertoli/css-in-js). The most popular include:
 
 * [css-modules](https://github.com/gajus/react-css-modules)
 * [styled-components](https://github.com/styled-components/styled-components)
@@ -2165,7 +2549,7 @@ export class HeaderComponent {
 }
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 When using [Single File Components](https://vuejs.org/v2/guide/single-file-components.html) you can simply style a component inside the `<style>` tag. When the tag has the `scoped` attribute, its CSS will apply to elements of the current component only.
 
@@ -2207,7 +2591,7 @@ module.exports = {
 
 Also known as innerHTML.
 
-### AngularJS
+## ![angular.js] AngularJS
 
 By default, the HTML content will be sanitized using the [$sanitize](https://docs.angularjs.org/api/ngSanitize/service/$sanitize) service. To utilize this functionality, you need to include `ngSanitize` in your module's dependencies. [Read more](https://docs.angularjs.org/api/ng/directive/ngBindHtml)
 
@@ -2215,24 +2599,24 @@ By default, the HTML content will be sanitized using the [$sanitize](https://doc
 <p ng-bind-html="$ctrl.article.content"></p>
 ```
 
-### Angular
+## ![angular] Angular
 
-The values are automatically sanitized before displaying them using [DomSanitizer](https://angular.io/docs/ts/latest/api/platform-browser/index/DomSanitizer-class.html)
+The values are automatically sanitized before displaying them using [DomSanitizer](https://angular.io/docs/ts/latest/api/platform-browser/index/DomSanitizer-class.html).
 
 ```html
 <p [innerHTML]="article.content"></p>
 ```
 
-### React
+## ![react] React
 
 All string values are sanitized before being inserted into the DOM. No more details are currently available.
 You need to pass an object containing the `__html` property with the desired template contents.
 
 ```jsx
-<p dangerouslySetInnerHTML={{__html: article.content}} />;
+<p dangerouslySetInnerHTML={ { __html: article.content } } />;
 ```
 
-### Vue.js
+## ![vue] Vue.js
 
 The content passed to [`v-html`](https://vuejs.org/v2/guide/syntax.html#Raw-HTML) is not being [sanitized](https://github.com/vuejs/vue/issues/6333). You have to use an external library, e.g. [sanitize-html](https://www.npmjs.com/package/sanitize-html).
 
